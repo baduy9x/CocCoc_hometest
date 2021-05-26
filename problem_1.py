@@ -1,4 +1,5 @@
 from collections import Counter
+import pandas as pd
 
 sample = open('../../hash_catid_count.csv', 'r')
 freq_counter = Counter()
@@ -18,5 +19,13 @@ print(total_counter.most_common(1))
 
 # For analyzing and visualize the data, we can create a pandas data frame such that contain 3 columns:
 # 1: category
-# 2: frequency
-# 3: total_count
+# 2: freq
+# 3: total
+
+df_freq = pd.DataFrame.from_dict({"cat": freq_counter.keys(), "freq": freq_counter.values()})
+df_total = pd.DataFrame.from_dict({"cat": total_counter.keys(), "total": total_counter.values()})
+
+df_stat = pd.merge(df_freq, df_total, on = 'cat')
+print(df_stat.head())
+
+print(df_stat.describe())
