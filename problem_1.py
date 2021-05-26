@@ -15,3 +15,8 @@ for line in sample.readlines():
 
 print(freq_counter.most_common(1))
 print(total_counter.most_common(1))
+
+# For analyzing and visualize the data, we can create a pandas data frame such that contain 3 columns:
+# 1: category
+# 2: frequency
+# 3: total_count
