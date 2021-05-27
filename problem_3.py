@@ -1,6 +1,11 @@
+import sys
+
 # assume that sample is a very large file (Terabyte of data).
 # read by batch (for example 1000 lines), sort by batch then write to temp files.
-sample = open('../../hash_catid_count.csv', 'r')
+
+path_to_sample_file = sys.argv[1]
+
+sample = open(path_to_sample_file, 'r')
 batch_size = 1000
 obj_id_line_map = {}
 count = 0
@@ -41,7 +46,6 @@ heapq.heapify(priority_queue)
 with open("output.temp", "w") as output:
     while priority_queue:
         item, line, file_stream = heapq.heappop(priority_queue)
-        print(item)
         output.write(line)
         new_line = file_stream.readline()
         if new_line == '' or new_line is None:
